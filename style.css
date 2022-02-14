@@ -1,0 +1,89 @@
+
+@media screen and (min-width: 600px){
+	main{
+		display: flex;
+		flex-flow: row;
+	}
+}
+
+body{
+	margin: 0;
+}
+
+h1{
+	margin: 0;
+	padding: 0.4em;
+	text-align: center;
+	background-color: #113;
+	color: #fff;
+}
+
+main{
+	margin: 0.5em;
+	text-align: center;
+}
+
+.container{
+	width: 370px;
+	height: 370px;
+	padding: 5px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-sizing: border-box;
+	box-shadow: 3px 3px 5px #ddd;
+	display: grid;
+	/*grid-template-columns: repeat(16, 1fr)*/
+}
+
+.controls{
+	width: 300px;
+	display: grid;
+	grid-template-columns: repeat(2,1fr);
+	padding: 1em;
+}
+
+.randomB, .clearPatternB, .clearInput, .eraser{
+	padding: 1em 1.2em;
+	border: 0.183em solid #aaf;
+	border-radius: 1em;
+	background-color: #c6f;
+	color: #fff;
+	font-weight: bold;
+	margin: 5px;
+	box-sizing: padding-box;
+	width: 10em;
+}
+
+.randomB:active, .clearPatternB:active, .clearInput:active, .eraser:active{
+	background: #c6c;
+	color: #fff;
+	border: 2px solid #bbf;
+}
+
+input[type='color']{
+	width: 6em;
+	height: 6em;
+	border: 0.4em solid #aaf;
+	border-radius: 3.3em;
+	background-color: #c6f;
+	padding: 2.8em;
+	margin: 1em;
+}
+
+input[type='range']{
+	width: 15em;
+}
+
+.dispPixel{
+	font-weight: 600;
+	color: #444;
+	background: skyblue;
+	border-radius: 0.7em;
+	width: 8em;
+	height: 2em;
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 1em;
+	padding: 1em;
+	line-height: 2.4em;
+}
