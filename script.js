@@ -1,6 +1,6 @@
 /*
  * ETCH-A-SKETCH
- * A 'theodinproject.com assingment'
+ * A 'theodinproject.com assignment'
  * DOM Manipulation
  */
 
@@ -71,7 +71,7 @@ clearPatternB.addEventListener('click', ()=>{
 })
 
 
-//eraser
+//Eraser
 let eraser = document.createElement('button')
 eraser.innerText = 'Eraser'
 eraser.classList.add('eraser')
@@ -99,7 +99,7 @@ randomB.addEventListener('click', ()=>{
 })
 
 
-//color picker
+//Color picker
 let colorPicked = '#000000'
 let colorInput = document.createElement('input')
 colorInput.type = 'color'
