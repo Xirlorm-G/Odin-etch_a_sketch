@@ -8,9 +8,14 @@
 let container = document.createElement('div')
 container.classList.add('container')
 
+let currentColor = ''
+
 //Create pixels
 function createPixels(n=16){
 	container.style.gridTemplateColumns = `repeat(${n}, 1fr)`
+	//display n × n number of pixels
+	dispPixNum.innerText = `${n} × ${n}`
+
 	for(let i = 0; i < n; ++i){
 		for(let j = 0; j < n; ++j){
 			let pixel = document.createElement('div')
@@ -20,34 +25,35 @@ function createPixels(n=16){
 				let col = e.target.getAttribute('data-color')
 				e.target.style.background = getColor(col)
 			})
+            currentColor = pixel.getAttribute('data-color')
 			container.appendChild(pixel)
 		}
 	}
-	//display number of pixels
-	dispPixNum.innerText = `${n} x ${n}`
+
+
 	//Pick a color from user or default to black
 	function getColor(flag){
 		switch(flag){
-			case 'userInput':	return colorPicked
-			case 'random':	return '#' + Math.floor(Math.random() * 4095).toString(16)
+			case 'userInput': return colorPicked
+			case 'random': return '#' + Math.floor(Math.random() * 4095).toString(16)
 			case 'eraser': return '#ffffff'
 			default: return '#000000'
 		}
 	}
 }
 
-
+/*
 //Clear screen and build pixels using user input
 let clearInput = document.createElement('button')
 clearInput.innerText = 'Clear and input'
-clearInput.setAttribute('class', 'clearInput')
+clearInput.classList.add('class', 'clearInput')
 clearInput.addEventListener('click', () => {
 	//check user input validity
 	function checkVal(value){
 		if(isNaN(value)){
 			num = prompt('Invalid input! Try again..')
 			checkVal(num)
-		}else if(value>64){
+		}else if(value>64 || value<1){
 			num = prompt('Invalid input! Try again..')
 			checkVal(num)
 		}else return value
@@ -56,7 +62,7 @@ clearInput.addEventListener('click', () => {
 	container.innerText = '' //clear current screen
 	createPixels(pixNum)
 	pixAdjust.value = pixNum
-});
+});*/
 
 
 //Clear pattern button
@@ -91,10 +97,12 @@ randomB.classList.add('randomB')
 randomB.addEventListener('click', ()=>{ 
 	switch(randomF){
 		case false:	setColor('random')
-				randomF = !randomF
+                    currentColor = 'random'
+				    randomF = !randomF
 				break;
 		default:	setColor()
-			randomF = !randomF
+                    currentColor = ''
+			        randomF = !randomF
 	}
 })
 
@@ -107,6 +115,7 @@ colorInput.value = '#cc66ff'
 colorInput.addEventListener('input', (e)=>{
 	setColor('userInput')
 	colorPicked = e.target.value
+    currentColor = 'userInput'
 })
 
 
@@ -131,6 +140,16 @@ pixAdjust.addEventListener('change', (e)=>{
 })
 
 
+//Color mode button
+let colorMode = document.createElement('button')
+colorMode.innerText = 'Color Mode'
+colorMode.addEventListener('click', ()=>{
+	let pixels = container.querySelectorAll('.pixel')
+	for(let i = 0; i< pixels.length; ++i){
+		pixels[i].style.background = setColor(currentColor)
+	}
+})
+
 //Display number of pixels n*n
 let dispPixNum = document.createElement('div')
 dispPixNum.classList.add('dispPixel')
@@ -143,16 +162,15 @@ createPixels()
 //Set the components together
 let main = document.querySelector('main')
 main.appendChild(container)
-
 let controls = document.createElement('div')
 controls.classList.add('controls')
+controls.appendChild(dispPixNum)
+controls.appendChild(pixAdjust)
 controls.appendChild(randomB)
-controls.appendChild(clearInput)
+//controls.appendChild(clearInput)
 controls.appendChild(clearPatternB)
 controls.appendChild(eraser)
-controls.appendChild(dispPixNum)
+controls.appendChild(colorMode)
 controls.appendChild(colorInput)
-controls.appendChild(pixAdjust)
-
 main.appendChild(controls)
 
