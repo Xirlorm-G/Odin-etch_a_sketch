@@ -22,9 +22,10 @@ h1{
 
 main{
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  column-gap: 2rem;
 }
 
 .container{
